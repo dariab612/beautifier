@@ -84,6 +84,10 @@ app.use('/profile', cabinetRouter);
 app.use('/adminchangereservation', adminChangeReservatioinRouter);
 app.use('/deleteuser', adminDeleteUser);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('../client/build/index.html'));
+});
+
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log('Сервер слушает порт', PORT);
