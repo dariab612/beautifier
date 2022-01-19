@@ -31,6 +31,7 @@ const freeTimeRouter = require('./routes/freeTime.router');
 const cabinetRouter = require('./routes/cabinet.route');
 const adminChangeReservatioinRouter = require('./routes/adminChangeReservation.route');
 const adminDeleteUser = require('./routes/adminDeleteUser.route');
+const indexRouter = require('./routes/index.route');
 
 const sessionMiddleware = require('./middlewares/sessions');
 
@@ -83,6 +84,7 @@ app.use('/freetime', freeTimeRouter);
 app.use('/profile', cabinetRouter);
 app.use('/adminchangereservation', adminChangeReservatioinRouter);
 app.use('/deleteuser', adminDeleteUser);
+app.use('/', indexRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve('./client/build/index.html'));
