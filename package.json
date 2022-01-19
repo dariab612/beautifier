@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-    "dotenv": "^14.2.0"
-  },
   "devDependencies": {},
   "scripts": {
     "start": "cd server && npm install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && node app.js",
