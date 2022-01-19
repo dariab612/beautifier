@@ -1,0 +1,24 @@
+{
+  "name": "beautifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^14.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "cd server && npm install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikssur/beautifier.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikssur/beautifier/issues"
+  },
+  "homepage": "https://github.com/mikssur/beautifier#readme"
+}

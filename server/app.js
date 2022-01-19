@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+require('dotenv').config();
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -9,8 +10,7 @@ const cors = require('cors');
 
 const app = express();
 
-const PORT = process.env.PORT ?? 3001;
-
+const { PORT } = process.env;
 const testRoute = require('./routes/test.route');
 
 const reviewsRoute = require('./routes/reviews.route');
@@ -45,9 +45,17 @@ const sessionConfig = {
     httpOnly: true,
   },
 };
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://beautifier-elbrus.herokuapp.com'],
+  credentials: true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+app.use(express.static(path.resolve('../client/build')));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(session(sessionConfig));
