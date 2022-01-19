@@ -87,7 +87,7 @@ app.use('/deleteuser', adminDeleteUser);
 app.use('/', indexRouter);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve('./client/build/index.html'));
+  res.sendFile(path.resolve('../client/build/index.html'));
 });
 
 app.listen(PORT, () => {

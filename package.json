@@ -5,7 +5,7 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "start": "&& npm run build && cd server && npm install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && node app.js",
+    "start": "cd server && npm install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
