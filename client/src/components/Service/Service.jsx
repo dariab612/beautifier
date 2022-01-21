@@ -3,25 +3,22 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { getFetchMastersAC } from '../../redux/actionCreators/mastersAC';
 
+import './Service.css';
 
 function Service({ service }) {
   const dispatch = useDispatch()
-  console.log('SERVICE RENDER', service)
   const servicename = service.name
   const id = service.id
   const picture = service.picture
   const currentURL = window.location.pathname
-  console.log('URLURLURLURL V KOMPONENTE SERVICE', currentURL, service)
   return (
-    <>
-      <Link to={`${currentURL}/${servicename}`}>
-        <li onClick={() => dispatch({ type: 'GET_FETCH_MASTERS', payload: { id } })} size="small">{service.name}</li>
+    <div className="service-card">
+      <Link to={`/categories/:categoryname/${servicename}/${id}`}>
+      <li onClick={() => dispatch({ type: 'GET_FETCH_MASTERS', payload: { id } })} size="small"><h3>{service.name}</h3></li>
       </Link>
-      <div>Description: {service.description} </div>
-      <p>!!!</p>
+      <div><strong>Описание</strong>: {service.description} </div>
       <img src={`/${picture}`} alt="" />
-      <p>!!!</p>
-    </>
+    </div>
   );
 }
 

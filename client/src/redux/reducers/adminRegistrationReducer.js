@@ -1,5 +1,8 @@
 
-const initialState = { reservations: [] }
+const initialState = {
+  reservations: [],
+  message: null
+}
 
 export const adminRegistrationReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,6 +11,16 @@ export const adminRegistrationReducer = (state = initialState, action) => {
       return { ...state, reservations: action.payload }
     }
 
+    case 'CHANGE_PASS': {
+      // console.log('==========>>> changePASS', action.payload);
+
+      return { ...state, message: action.payload.result.message }
+    }
+    case 'RESET_MESSAGE': {
+      // console.log('==========>>> changePASS', action.payload);
+
+      return { ...state, message: null }
+    }
     default:
       return state;
   }

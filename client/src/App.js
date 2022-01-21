@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Nav from './components/Nav/Nav.jsx'
 import Home from "./components/Home/Home.jsx";
@@ -14,16 +14,21 @@ import Portfolio from "./components/Portfolio/Portfolio.jsx"
 import PortfolioCard from "./components/PortfolioCard/PortfolioCard.jsx"
 import AdminCabinet from "./components/AdminCabinet/AdminCabinet.jsx";
 import ReservationCategories from './components/ReservationCAtegories/ReservationCategories.jsx';
-import AdminRegistration from './components/AdminRegistration/AdminRegistration.jsx';
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
 import Profile from "./components/Profile/Profile"
-
+import AdminMasters from './components/AdminMasters/AdminMasters.jsx';
+import AdminReview from './components/AdminReview/AdminReview.jsx';
+import AdminChangePass from './components/AdminChangePass/AdminChangePass.jsx';
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
 
-  // let currentURL = window.location.pathname
-  // console.log('DOLBANNIJ URLLLLLLLLLLLLLLLLLL', currentURL)
+  useEffect(() => {
+    dispatch({ type: 'SESSION_FETCH' })
+  })
+
 
   return (
     <BrowserRouter>
@@ -39,11 +44,11 @@ function App() {
           <Categories />
         </Route>
 
-        <Route exact path="/categories/:categoryname">
+        <Route exact path="/categories/:categoryname/:id">
           <ServiceList />
         </Route>
 
-        <Route exact path="/categories/:categoryname/:service">
+        <Route exact path="/categories/:categoryname/:service/:id">
           <MasterList />
         </Route>
 
@@ -65,6 +70,18 @@ function App() {
 
         <Route exact path="/admincabinet">
           <AdminCabinet />
+        </Route>
+
+        <Route exact path="/adminmasters">
+          <AdminMasters />
+        </Route>
+
+        <Route exact path="/adminreview">
+          <AdminReview />
+        </Route>
+
+        <Route exact path="/adminchangepass">
+          <AdminChangePass />
         </Route>
 
         <Route exact path="/signup">

@@ -1,7 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
 const adminAuthFetch = async ({ login, pass }) => {
-  console.log(login);
   const response = await fetch(`/adminform`, {
     method: 'POST',
     headers: { 'Content-Type': 'Application/json' },
@@ -15,11 +14,17 @@ const adminAuthFetch = async ({ login, pass }) => {
 }
 
 function* fetchAdminAuth(action) {
-  const reservations = yield call(adminAuthFetch, {
+  const session = yield call(adminAuthFetch, {
     login: action.payload.login,
     pass: action.payload.pass
   });
-  yield put({ type: "INIT_RESERVATIONS", payload: reservations });
+  if (session.answer === true) {
+    console.log(session, 'authcheck');
+    yield put({ type: "AUTH_ANSWER", payload: session });
+  } else {
+    console.log(session, 'sessis');
+    yield put({ type: "INIT_SESSION", payload: { session } });
+  }
 }
 
 

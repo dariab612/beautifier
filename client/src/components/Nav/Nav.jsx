@@ -1,21 +1,17 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
+import './Nav.css';
 
 function Nav(props) {
-  const dispatch = useDispatch();
   const { session } = useSelector((state) => state.sessionReducer)
-  // должно быть в юз эффекте
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'SESSION_FETCH' })
-  }, [dispatch])
-
- // console.log(session.authClient, 'client session')
-  console.log(session);
+  // console.log(session.authClient, 'client session')
   async function signOut() {
     try {
       await fetch('/signout');
+      dispatch({ type: 'SESSION_FETCH' })
     }
     catch (err) {
       console.log(err.message)
@@ -24,45 +20,56 @@ function Nav(props) {
   }
 
   return (
+    <nav className="main-nav">
+
     <ul>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/">Главная</Link>
       </li>
       <li>
-        <Link to="/categories">Categories</Link>
+        <Link to="/categories">Категории</Link>
       </li>
       <li>
-        <Link to="/about">About</Link>
+        <Link to="/about">О нас</Link>
       </li>
       <li>
-        <Link to="/reviews">Review</Link>
+        <Link to="/reviews">Отзывы</Link>
       </li>
       <li>
-        <Link to="/portfolio">Portfolio</Link>
+        <Link to="/portfolio">Мастера</Link>
       </li>
-      {session.authClient && session.isAdmin ?
+      {/* {session.authClient && session.isAdmin ?
         <li>
           <Link to="/admincabinet">Кабинет</Link>
-        </li> : ''}
+        </li> : ''} */}
       <li>
-          <Link to="/reservation">Записаться</Link>
+        <Link to="/reservation">Записаться</Link>
       </li>
-      {session.authClient ?
+      { 
+      session.isAdmin ?
         <> <li>
-          <Link to='/profile'> Cabinet</Link>
+          <Link to='/admincabinet'>Кабинет администратора</Link>
         </li>
-          <button onClick={() => signOut()}>Sign Out</button></>
-        : <>
-          <li>
-            <Link to="/signup">Sign Up</Link>
-          </li>
-          <li>
-            <Link to="/signin">Sign In</Link>
-          </li>
-        </>}
-
-
+          <li><a onClick={() => signOut()}>Выйти</a></li></>
+        : 
+        session.authClient ? 
+        <> 
+        <li>
+        <Link to='/profile'>Личный кабинет</Link>
+      </li>
+        <li><a onClick={() => signOut()}>Выйти</a></li></> 
+        : 
+        <>
+        <li>
+          <Link to="/signup">Зарегистрироваться</Link>
+        </li>
+        <li>
+          <Link to="/signin">Войти</Link>
+        </li>
+      </>
+      }
     </ul>
+    </nav>
   );
 }
 

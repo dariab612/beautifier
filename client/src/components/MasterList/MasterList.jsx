@@ -9,12 +9,11 @@ import Master from '../Master/Master';
 function MasterList(props) {
 
   const masters = useSelector(state => state.mastersReducer.masters)
-  console.log('MASTERS V KOMPONENTEEEEEEEEEEEEEEEEEE', masters)
   const dispatch = useDispatch()
   const { service } = useParams()
-  console.log('NAZVANIJA YSLYGI V SPISKE MASTEROV', service)
+  const { id } = useParams()
 
-  //useEffect(() => {dispatch(fetchServicesAC())}, [dispatch])
+  useEffect(() => { dispatch({ type: 'GET_FETCH_MASTERS', payload: { id } }) }, [dispatch])
 
   return (
     <div>
