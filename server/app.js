@@ -53,7 +53,7 @@ const sessionConfig = {
   },
 };
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://beautifier-elbrus.herokuapp.com'],
+  origin: ['http://localhost:3000', 'https://beautifier-lynxes.herokuapp.com'],
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
